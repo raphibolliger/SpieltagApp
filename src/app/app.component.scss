@@ -1,0 +1,19 @@
+.top-bar {
+  background-color: #e82025;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.nav-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+
+  text-align: center;
+  padding: 1rem;
+  background-color: lightgrey;
+
+  a {
+    text-decoration: none;
+  }
+}
