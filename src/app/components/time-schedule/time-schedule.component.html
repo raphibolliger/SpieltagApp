@@ -1,0 +1,21 @@
+<div class="times">
+  <mat-form-field>
+    <mat-label>Wähle eine Zeit</mat-label>
+    <mat-select [formControl]="timeFormControl">
+      <mat-option *ngFor="let time of times" [value]="time.number">
+        <span>{{ time.from }} - {{ time.to }}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="time-game" *ngFor="let game of timeGames$ | async">
+  <div class="time">
+    <span>{{ game.location.game }}</span>
+    <span>{{ game.location.name }}</span>
+  </div>
+  <div class="teams">
+    <span> Team {{ game.leftTeam.number }} </span>
+    <span> Team {{ game.rightTeam.number }} </span>
+  </div>
+</div>

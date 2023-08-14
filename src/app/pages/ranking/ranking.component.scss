@@ -2,6 +2,14 @@
   display: grid;
   grid-template-columns: 1fr auto auto auto auto auto;
 
+  span.row {
+    display: contents;
+
+    &:nth-child(even) > span {
+      background-color: whitesmoke;
+    }
+  }
+
   span {
     padding: 0.5rem 0.75rem;
     text-align: right;

@@ -1,0 +1,45 @@
+.locations {
+  padding: 0.5rem;
+  mat-form-field {
+    width: 100%;
+    margin-bottom: -1.25rem;
+  }
+}
+
+.location-game {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  grid-gap: 1rem;
+  background-color: whitesmoke;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  margin-bottom: 0.25rem;
+
+  .time {
+    display: flex;
+    flex-direction: column;
+
+    > span:first-child {
+      font-size: 120%;
+    }
+
+    > span:last-child {
+      font-size: 80%;
+      color: grey;
+    }
+  }
+
+  .team {
+    display: flex;
+    flex-direction: column;
+
+    &.left {
+      text-align: right;
+    }
+
+    > span:last-child {
+      font-size: 80%;
+      color: grey;
+    }
+  }
+}

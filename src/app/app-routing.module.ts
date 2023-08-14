@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TeamScheduleComponent } from './pages/schedule/schedule.component';
+import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/schedule', pathMatch: 'full' },
-  { path: 'schedule', component: TeamScheduleComponent },
+  { path: 'schedule', component: ScheduleComponent },
   { path: 'ranking', component: RankingComponent },
   { path: '**', redirectTo: '/schedule', pathMatch: 'full' },
 ];

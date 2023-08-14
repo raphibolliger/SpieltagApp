@@ -1,123 +1,46 @@
 <ng-container [ngSwitch]="mode$ | async">
-  <!-- LOCATIONS -->
-  <ng-container *ngSwitchCase="'location'">
-    <div class="mode">
-      <button
-        mat-raised-button
+  <div class="mode">
+    <small> Wähle die Ansicht für Spielplan & Resultate: </small>
+    <mat-button-toggle-group
+      [value]="mode$ | async"
+      name="fontStyle"
+      aria-label="Font Style"
+    >
+      <mat-button-toggle
+        value="team"
         routerLink="/schedule"
         [queryParams]="{ mode: 'team' }"
       >
-        Spielplan nach Teams anzeigen
-      </button>
-    </div>
+        Team
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="location"
+        routerLink="/schedule"
+        [queryParams]="{ mode: 'location' }"
+        >Standort</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="time"
+        routerLink="/schedule"
+        [queryParams]="{ mode: 'time' }"
+      >
+        Zeit
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
 
-    <div class="locations">
-      <mat-form-field>
-        <mat-label>Wähle dein Standort</mat-label>
-        <mat-select [formControl]="locationControl">
-          <mat-option
-            *ngFor="let location of locations"
-            [value]="location.number"
-          >
-            <span>{{ location.name }} - {{ location.game }}</span>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+  <!-- LOCATIONS -->
+  <ng-container *ngSwitchCase="'location'">
+    <app-location-schedule></app-location-schedule>
+  </ng-container>
 
-    <div class="location-game" *ngFor="let game of locationGames$ | async">
-      <div class="time">
-        <span>{{ game.time.from }}</span>
-        <span>bis {{ game.time.to }}</span>
-      </div>
-      <div class="team left">
-        <span>Team {{ game.leftTeam.number }}</span>
-        <span>{{ game.leftTeam.captain }}</span>
-      </div>
-      <span style="text-align: center">
-        {{ game.location.number === 11 ? "mit" : "vs" }}
-      </span>
-      <div class="team">
-        <span>Team {{ game.rightTeam.number }}</span>
-        <span>{{ game.rightTeam.captain }}</span>
-      </div>
-    </div>
+  <!-- TIME -->
+  <ng-container *ngSwitchCase="'time'">
+    <app-time-schedule></app-time-schedule>
   </ng-container>
 
   <!-- TEAMS -->
   <ng-container *ngSwitchDefault>
-    <div class="mode">
-      <button
-        mat-raised-button
-        routerLink="/schedule"
-        [queryParams]="{ mode: 'location' }"
-      >
-        Spielplan nach Standorten anzeigen
-      </button>
-    </div>
-
-    <div class="teams">
-      <mat-form-field>
-        <mat-label>Wähle dein Team</mat-label>
-        <mat-select [formControl]="teamControl">
-          <mat-option *ngFor="let team of teams" [value]="team.number">
-            <span>Team {{ team.number }} - {{ team.captain }}</span>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="team-game" *ngFor="let game of games$ | async">
-      <div class="time">
-        <span>{{ game.time.from }}</span>
-        <span>bis {{ game.time.to }}</span>
-      </div>
-      <div class="info">
-        <span>
-          <strong>{{ game.location.name }}</strong>
-        </span>
-        <span>
-          {{ game.location.game }}
-          <ng-container
-            *ngIf="game.leftTeam.number === teamControl.value; else leftTeam"
-          >
-            {{ game.location.number === 11 ? "mit" : "vs" }} Team
-            {{ game.rightTeam.number }}
-          </ng-container>
-          <ng-template #leftTeam>
-            {{ game.location.number === 11 ? "mit" : "vs" }} Team
-            {{ game.leftTeam.number }}
-          </ng-template>
-        </span>
-      </div>
-      <div class="results">
-        <ng-container
-          *ngIf="game.leftTeam.number === teamControl.value; else rightPoints"
-        >
-          <ng-container [ngSwitch]="game.leftTeamPoints">
-            <span *ngSwitchCase="undefined"></span>
-            <span *ngSwitchCase="'3'" style="color: green">Sieg</span>
-            <span *ngSwitchCase="'1'" style="color: grey">Unentschieden</span>
-            <span *ngSwitchCase="'0'" style="color: red">Niederlage</span>
-            <span *ngSwitchDefault></span>
-          </ng-container>
-          <span *ngIf="game.leftTeamPoints !== undefined">
-            Punkte: {{ game.leftTeamPoints }}
-          </span>
-        </ng-container>
-        <ng-template #rightPoints>
-          <ng-container [ngSwitch]="game.rightTeamPoints">
-            <span *ngSwitchCase="undefined"></span>
-            <span *ngSwitchCase="'3'" style="color: green">Sieg</span>
-            <span *ngSwitchCase="'1'" style="color: grey">Unentschieden</span>
-            <span *ngSwitchCase="'0'" style="color: red">Niederlage</span>
-            <span *ngSwitchDefault></span>
-          </ng-container>
-          <span *ngIf="game.rightTeamPoints !== undefined">
-            Punkte: {{ game.rightTeamPoints }}
-          </span>
-        </ng-template>
-      </div>
-    </div>
+    <app-team-schedule></app-team-schedule>
   </ng-container>
 </ng-container>

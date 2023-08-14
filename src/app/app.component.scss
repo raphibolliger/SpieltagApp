@@ -11,9 +11,13 @@
 
   text-align: center;
   padding: 1rem;
-  background-color: lightgrey;
 
   a {
     text-decoration: none;
+
+    &.active {
+      background-color: rgba(232, 32, 37, 0.5);
+      font-weight: bold;
+    }
   }
 }

@@ -1,101 +1,11 @@
 .mode {
   padding: 0.5rem;
   padding-bottom: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-}
+  padding-top: 0;
 
-.teams,
-.locations {
-  padding: 0.5rem;
-  mat-form-field {
-    width: 100%;
-    margin-bottom: -1.25rem;
-  }
-}
-
-.team-game {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-gap: 1rem;
-  background-color: whitesmoke;
-  padding: 0.5rem 1rem;
-  align-items: center;
-  margin-bottom: 0.25rem;
-
-  .time {
-    display: flex;
-    flex-direction: column;
-
-    > span:first-child {
-      font-size: 120%;
-    }
-
-    > span:last-child {
-      font-size: 80%;
-      color: grey;
-    }
-  }
-
-  .info {
-    display: flex;
-    flex-direction: column;
-
-    > span:last-child {
-      font-size: 90%;
-      color: grey;
-    }
-  }
-
-  .results {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-
-    > span:first-child {
-      font-size: 90%;
-    }
-
-    > span:last-child {
-      font-size: 80%;
-    }
-  }
-}
-
-.location-game {
-  display: grid;
-  grid-template-columns: auto 1fr auto 1fr;
-  grid-gap: 1rem;
-  background-color: whitesmoke;
-  padding: 0.5rem 1rem;
-  align-items: center;
-  margin-bottom: 0.25rem;
-
-  .time {
-    display: flex;
-    flex-direction: column;
-
-    > span:first-child {
-      font-size: 120%;
-    }
-
-    > span:last-child {
-      font-size: 80%;
-      color: grey;
-    }
-  }
-
-  .team {
-    display: flex;
-    flex-direction: column;
-
-    &.left {
-      text-align: right;
-    }
-
-    > span:last-child {
-      font-size: 80%;
-      color: grey;
-    }
+  mat-button-toggle-group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    margin-top: 0.25rem;
   }
 }

@@ -5,12 +5,12 @@
   <span class="header">U</span>
   <span class="header">N</span>
   <span class="header">Punkte</span>
-  <ng-container *ngFor="let team of teams$ | async">
+  <span class="row" *ngFor="let team of teams$ | async">
     <span class="name">Team {{ team.team.number }}</span>
     <span>{{ team.games }}</span>
     <span>{{ team.wins }}</span>
     <span>{{ team.ties }}</span>
     <span>{{ team.losses }}</span>
     <span>{{ team.points }}</span>
-  </ng-container>
+  </span>
 </div>

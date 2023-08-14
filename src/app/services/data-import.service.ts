@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, shareReplay, tap } from 'rxjs';
-import { Game } from '../data/schedule';
+import { Game } from '../data/game';
 import { LOCATIONS } from '../data/locations';
 import { TEAMS, Team } from '../data/teams';
 import { Time } from '../data/times';
