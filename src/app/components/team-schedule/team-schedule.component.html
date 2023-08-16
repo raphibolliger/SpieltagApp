@@ -39,7 +39,7 @@
       <ng-container [ngSwitch]="game.leftTeamPoints">
         <span *ngSwitchCase="undefined"></span>
         <span *ngSwitchCase="'3'" style="color: green">Sieg</span>
-        <span *ngSwitchCase="'1'" style="color: grey">Unentschieden</span>
+        <span *ngSwitchCase="'1'" style="color: skyblue">Unentschieden</span>
         <span *ngSwitchCase="'0'" style="color: red">Niederlage</span>
         <span *ngSwitchDefault></span>
       </ng-container>
@@ -51,7 +51,7 @@
       <ng-container [ngSwitch]="game.rightTeamPoints">
         <span *ngSwitchCase="undefined"></span>
         <span *ngSwitchCase="'3'" style="color: green">Sieg</span>
-        <span *ngSwitchCase="'1'" style="color: grey">Unentschieden</span>
+        <span *ngSwitchCase="'1'" style="color: skyblue">Unentschieden</span>
         <span *ngSwitchCase="'0'" style="color: red">Niederlage</span>
         <span *ngSwitchDefault></span>
       </ng-container>

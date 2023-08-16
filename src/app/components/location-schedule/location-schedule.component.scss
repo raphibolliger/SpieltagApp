@@ -41,5 +41,17 @@
       font-size: 80%;
       color: grey;
     }
+
+    > span.green {
+      color: green;
+    }
+
+    > span.blue {
+      color: skyblue;
+    }
+
+    > span.red {
+      color: red;
+    }
   }
 }

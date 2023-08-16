@@ -17,6 +17,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TimeScheduleComponent } from './components/time-schedule/time-schedule.component';
 import { TeamScheduleComponent } from './components/team-schedule/team-schedule.component';
 import { LocationScheduleComponent } from './components/location-schedule/location-schedule.component';
+import { GameResultColorPipe } from './pipes/game-result-color.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LocationScheduleComponent } from './components/location-schedule/locati
     TeamScheduleComponent,
     TimeScheduleComponent,
     LocationScheduleComponent,
+    GameResultColorPipe,
   ],
   imports: [
     BrowserModule,

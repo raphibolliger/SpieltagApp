@@ -3,9 +3,17 @@
 @use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
+// Plus imports for other components in your app.
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
+$alphavideo-typography: mat.define-typography-config(
+  $font-family: "'Open Sans', sans-serif",
+);
+@include mat.typography-hierarchy($alphavideo-typography);
 @include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
@@ -26,6 +34,7 @@ $spieltag-theme: mat.define-light-theme(
       accent: $spieltag-accent,
       warn: $spieltag-warn,
     ),
+    typography: $alphavideo-typography,
   )
 );
 
