@@ -52,13 +52,13 @@ export const LOCATIONS = [
     number: 8,
     name: 'Roter Platz 4',
     game: 'Ballonspiel',
-    manager: 'Esther Wernli',
+    manager: 'Esther Wernli & Nadja Weber',
   },
   {
     number: 9,
     name: 'Unterstand oben',
     game: 'Spielkartenlauf',
-    manager: 'Nadja Weber',
+    manager: 'Janick Ammann & Julius Behrendt',
   },
   {
     number: 10,

@@ -6,9 +6,9 @@ export interface Team {
 export const TEAMS = [
   { number: 1, captain: 'Sascha Rudi' },
   { number: 2, captain: 'Raphael Mauch' },
-  { number: 3, captain: 'Michael Duss' },
-  { number: 4, captain: 'Flavio Gläser' },
-  { number: 5, captain: 'Samuel Schweller' },
+  { number: 3, captain: 'Michael Duss & Milan Milosavlijevic' },
+  { number: 4, captain: 'Flavio Gläser & Carlos Caforio' },
+  { number: 5, captain: 'Samuel Scheiwiller' },
   { number: 6, captain: 'Manuel Frey' },
   { number: 7, captain: 'Ingmar Steiger' },
   { number: 8, captain: 'Joshua Schmid' },
