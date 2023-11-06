@@ -14,10 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { TimeScheduleComponent } from './components/time-schedule/time-schedule.component';
 import { TeamScheduleComponent } from './components/team-schedule/team-schedule.component';
 import { LocationScheduleComponent } from './components/location-schedule/location-schedule.component';
 import { GameResultColorPipe } from './pipes/game-result-color.pipe';
+import { GamesComponent } from './pages/games/games.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import { GameResultColorPipe } from './pipes/game-result-color.pipe';
     TimeScheduleComponent,
     LocationScheduleComponent,
     GameResultColorPipe,
+    GamesComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,9 @@ import { GameResultColorPipe } from './pipes/game-result-color.pipe';
     MatSelectModule,
     MatFormFieldModule,
     MatButtonToggleModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

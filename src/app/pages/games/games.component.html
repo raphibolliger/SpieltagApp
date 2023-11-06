@@ -1,0 +1,33 @@
+<mat-checkbox [formControl]="showOnlyHomeControl">
+  nur Heimspiele anzeigen
+</mat-checkbox>
+<span>
+  <input
+    type="hidden"
+    matInput
+    [matDatepicker]="picker"
+    [formControl]="dateControl"
+  />
+  <mat-datepicker #picker [touchUi]="true"></mat-datepicker>
+  <button mat-icon-button (click)="picker.open()" #toggle>
+    <mat-icon>calendar_month</mat-icon>
+  </button>
+  {{ dateControl.value | date : "dd.MM.yyyy" }}
+</span>
+
+<div class="games">
+  <span>Datum</span>
+  <span>Halle</span>
+  <span>Typ</span>
+  <span>Heim</span>
+  <span>Gast</span>
+  <span>Liga</span>
+  <div class="game" *ngFor="let game of gamesInWohlen$ | async">
+    <span>{{ game.gameDateTime }}</span>
+    <span>{{ game.venue }}</span>
+    <span>{{ game.gameTypeLong }}</span>
+    <span>{{ game.teamAName }}</span>
+    <span>{{ game.teamBName }}</span>
+    <span>{{ game.leagueLong }}</span>
+  </div>
+</div>

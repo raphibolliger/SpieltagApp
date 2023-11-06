@@ -1,0 +1,9 @@
+.games {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto 1fr;
+  grid-gap: 1rem;
+
+  .game {
+    display: contents;
+  }
+}
