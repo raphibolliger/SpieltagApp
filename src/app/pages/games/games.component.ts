@@ -8,21 +8,37 @@ import { ShvApiService } from 'src/app/services/shv-api.service';
   styleUrls: ['./games.component.scss'],
 })
 export class GamesComponent {
-  readonly showOnlyHomeControl = new FormControl<boolean>(false);
+  readonly showOnlyHomeControl = new FormControl<boolean>(true);
   readonly dateControl = new FormControl<Date | null>(null);
 
   gamesInWohlen$ = this.showOnlyHomeControl.valueChanges.pipe(
     startWith(this.showOnlyHomeControl.value),
     switchMap((showOnlyHome) =>
-      this.shvApi.games$.pipe(
-        map((games) => {
-          if (showOnlyHome) {
-            return games.filter((game) => game.venueZip === 5610);
-          }
-          return games;
-        }),
-        map((games) =>
-          games.sort((a, b) => a.gameDateTime.localeCompare(b.gameDateTime))
+      this.dateControl.valueChanges.pipe(
+        startWith(null),
+        switchMap((date) =>
+          this.shvApi.games$.pipe(
+            map((games) => {
+              let filteredGames = games;
+              if (showOnlyHome) {
+                filteredGames = games.filter((game) => game.venueZip === 5610);
+              }
+              if (date) {
+                filteredGames = filteredGames.filter((game) => {
+                  const gameDate = new Date(
+                    game.gameDateTime
+                  ).toLocaleDateString();
+                  const filterDate = date.toLocaleDateString();
+                  console.log(gameDate, filterDate);
+                  return gameDate === filterDate;
+                });
+              }
+              return filteredGames;
+            }),
+            map((games) =>
+              games.sort((a, b) => a.gameDateTime.localeCompare(b.gameDateTime))
+            )
+          )
         )
       )
     )

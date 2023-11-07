@@ -1,19 +1,22 @@
-<mat-checkbox [formControl]="showOnlyHomeControl">
-  nur Heimspiele anzeigen
-</mat-checkbox>
-<span>
-  <input
-    type="hidden"
-    matInput
-    [matDatepicker]="picker"
-    [formControl]="dateControl"
-  />
-  <mat-datepicker #picker [touchUi]="true"></mat-datepicker>
-  <button mat-icon-button (click)="picker.open()" #toggle>
-    <mat-icon>calendar_month</mat-icon>
-  </button>
-  {{ dateControl.value | date : "dd.MM.yyyy" }}
-</span>
+<input
+  type="hidden"
+  matInput
+  [matDatepicker]="picker"
+  [formControl]="dateControl"
+/>
+<mat-datepicker #picker [touchUi]="true"></mat-datepicker>
+
+<div class="wrapper">
+  <mat-checkbox [formControl]="showOnlyHomeControl">
+    nur Heimspiele anzeigen
+  </mat-checkbox>
+  <div class="calendar">
+    <button mat-icon-button (click)="picker.open()" #toggle>
+      <mat-icon>calendar_month</mat-icon>
+    </button>
+    {{ dateControl.value | date : "dd.MM.yyyy" }}
+  </div>
+</div>
 
 <div class="games">
   <span>Datum</span>
