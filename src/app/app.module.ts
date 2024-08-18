@@ -23,7 +23,6 @@ import { TimeScheduleComponent } from './components/time-schedule/time-schedule.
 import { TeamScheduleComponent } from './components/team-schedule/team-schedule.component';
 import { LocationScheduleComponent } from './components/location-schedule/location-schedule.component';
 import { GameResultColorPipe } from './pipes/game-result-color.pipe';
-import { GamesComponent } from './pages/games/games.component';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
@@ -35,7 +34,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     TimeScheduleComponent,
     LocationScheduleComponent,
     GameResultColorPipe,
-    GamesComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
