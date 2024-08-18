@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/spieltag",
+    "public": "dist/spieltag/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
