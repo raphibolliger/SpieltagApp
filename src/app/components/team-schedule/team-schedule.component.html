@@ -14,6 +14,7 @@
     <span>{{ game.time.from }}</span>
     <span>bis {{ game.time.to }}</span>
   </div>
+  @if (game.type === 'game'){
   <div class="info">
     <span>
       <strong>{{ game.location.name }}</strong>
@@ -60,4 +61,7 @@
       </span>
     </ng-template>
   </div>
+  } @else {
+  <span>☕️&nbsp;&nbsp;Pause</span>
+  }
 </div>

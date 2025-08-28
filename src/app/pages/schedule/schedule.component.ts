@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 
 @Component({
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss'],
+    templateUrl: './schedule.component.html',
+    styleUrls: ['./schedule.component.scss'],
+    standalone: false
 })
 export class ScheduleComponent {
   readonly mode$: Observable<'team' | 'location' | 'time'> =

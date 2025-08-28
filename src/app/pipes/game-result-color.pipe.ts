@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'resultColor',
+    name: 'resultColor',
+    standalone: false
 })
 export class GameResultColorPipe implements PipeTransform {
   transform(points: number | undefined): string | undefined {

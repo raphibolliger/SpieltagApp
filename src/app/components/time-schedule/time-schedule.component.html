@@ -15,11 +15,15 @@
     <span>{{ game.location.name }}</span>
   </div>
   <div class="teams">
+    @if (game.type === 'pause') {
+    <div class="pause">☕️&nbsp;&nbsp;Pause</div>
+    } @else {
     <span [ngClass]="game.leftTeamPoints | resultColor">
       Team {{ game.leftTeam.number }}
     </span>
     <span [ngClass]="game.rightTeamPoints | resultColor">
       Team {{ game.rightTeam.number }}
     </span>
+    }
   </div>
 </div>

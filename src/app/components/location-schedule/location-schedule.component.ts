@@ -5,9 +5,10 @@ import { LOCATIONS } from 'src/app/data/locations';
 import { DataImportService } from 'src/app/services/data-import.service';
 
 @Component({
-  selector: 'app-location-schedule',
-  templateUrl: './location-schedule.component.html',
-  styleUrls: ['./location-schedule.component.scss'],
+    selector: 'app-location-schedule',
+    templateUrl: './location-schedule.component.html',
+    styleUrls: ['./location-schedule.component.scss'],
+    standalone: false
 })
 export class LocationScheduleComponent {
   readonly initialLocationNumber: number;

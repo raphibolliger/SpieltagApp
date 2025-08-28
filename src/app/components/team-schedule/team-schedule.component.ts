@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith, switchMap } from 'rxjs';
+import { Pause } from 'src/app/data/game';
 import { TEAMS } from 'src/app/data/teams';
+import { TIMES } from 'src/app/data/times';
 import { DataImportService } from 'src/app/services/data-import.service';
 
 @Component({
   selector: 'app-team-schedule',
   templateUrl: './team-schedule.component.html',
   styleUrls: ['./team-schedule.component.scss'],
+  standalone: false,
 })
 export class TeamScheduleComponent {
   readonly initialTeamNumber: number;
@@ -22,11 +25,25 @@ export class TeamScheduleComponent {
           if (teamNumber) {
             localStorage.setItem('teamNumber', teamNumber.toString());
           }
-          return games.filter(
-            (game) =>
-              game.leftTeam.number === teamNumber ||
-              game.rightTeam.number === teamNumber
-          );
+
+          const teamGames = TIMES.map((t) => {
+            const timeGames = games
+              .filter((g) => g.time.number === t.number)
+              .filter((g) => g.type === 'game');
+            const teamGame = timeGames.find(
+              (g) =>
+                g.leftTeam.number === teamNumber ||
+                g.rightTeam.number === teamNumber
+            );
+
+            if (!teamGame) {
+              return <Pause>{ type: 'pause', time: t };
+            }
+
+            return teamGame;
+          });
+
+          return teamGames;
         })
       )
     )

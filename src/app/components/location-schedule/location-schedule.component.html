@@ -16,6 +16,7 @@
     <span>{{ game.time.from }}</span>
     <span>bis {{ game.time.to }}</span>
   </div>
+  @if (game.type === 'game'){
   <div class="team left">
     <span [ngClass]="game.leftTeamPoints | resultColor">
       Team {{ game.leftTeam.number }}
@@ -23,7 +24,7 @@
     <span>{{ game.leftTeam.captain }}</span>
   </div>
   <span style="text-align: center">
-    {{ game.location.number === 11 ? "mit" : "vs" }}
+    {{ game.location.number === 9 ? "mit" : "vs" }}
   </span>
   <div class="team">
     <span [ngClass]="game.rightTeamPoints | resultColor">
@@ -31,4 +32,9 @@
     </span>
     <span>{{ game.rightTeam.captain }}</span>
   </div>
+  } @else {
+  <span style="text-align: center; grid-column: span 3"
+    >☕️&nbsp;&nbsp;Pause</span
+  >
+  }
 </div>

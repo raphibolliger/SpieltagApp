@@ -13,8 +13,9 @@ interface TeamRanking {
 }
 
 @Component({
-  templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.scss'],
+    templateUrl: './ranking.component.html',
+    styleUrls: ['./ranking.component.scss'],
+    standalone: false
 })
 export class RankingComponent {
   readonly teams$: Observable<TeamRanking[]>;

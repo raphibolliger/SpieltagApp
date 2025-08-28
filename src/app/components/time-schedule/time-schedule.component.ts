@@ -5,9 +5,10 @@ import { TIMES } from 'src/app/data/times';
 import { DataImportService } from 'src/app/services/data-import.service';
 
 @Component({
-  selector: 'app-time-schedule',
-  templateUrl: './time-schedule.component.html',
-  styleUrls: ['./time-schedule.component.scss'],
+    selector: 'app-time-schedule',
+    templateUrl: './time-schedule.component.html',
+    styleUrls: ['./time-schedule.component.scss'],
+    standalone: false
 })
 export class TimeScheduleComponent {
   readonly times = TIMES;
