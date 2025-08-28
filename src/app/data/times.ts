@@ -1,5 +1,3 @@
-import { from } from 'rxjs';
-
 export interface Time {
   number: number;
   from: string;
@@ -13,7 +11,7 @@ export const TIMES: Time[] = [
   { number: 4, from: '10:45', to: '11:05' },
   { number: 5, from: '11:10', to: '11:30' },
   { number: 6, from: '11:35', to: '11:55' },
-  //{ number: 7, from: '12:00', to: '13:15' }, mittagessen, index/number is used
+  { number: 7, from: '12:00', to: '13:30' }, // mittagessen, index/number is used
   { number: 8, from: '13:20', to: '13:40' },
   { number: 9, from: '13:45', to: '14:05' },
   { number: 10, from: '14:10', to: '14:30' },

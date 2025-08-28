@@ -80,7 +80,11 @@
         }
       </div>
     } @else {
-      <span>☕️&nbsp;&nbsp;Pause</span>
+      @if (game.time.number === 7) {
+        <span>😋&nbsp;&nbsp;Mittagspause</span>
+      } @else {
+        <span>🧃&nbsp;&nbsp;Pause</span>
+      }
     }
   </div>
 }

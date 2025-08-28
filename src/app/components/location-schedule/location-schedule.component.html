@@ -32,7 +32,13 @@
         <span>{{ game.rightTeam.captain }}</span>
       </div>
     } @else {
-      <span style="text-align: center; grid-column: span 3">☕️&nbsp;&nbsp;Pause</span>
+      <span style="text-align: center; grid-column: span 3">
+        @if (game.time.number === 7) {
+          😋&nbsp;&nbsp;Mittagspause
+        } @else {
+          🧃&nbsp;&nbsp;Pause
+        }
+      </span>
     }
   </div>
 }
