@@ -1,46 +1,23 @@
-<ng-container [ngSwitch]="mode$ | async">
-  <div class="mode">
-    <small> Wähle die Ansicht für Spielplan & Resultate: </small>
-    <mat-button-toggle-group
-      [value]="mode$ | async"
-      name="fontStyle"
-      aria-label="Font Style"
-    >
-      <mat-button-toggle
-        value="team"
-        routerLink="/schedule"
-        [queryParams]="{ mode: 'team' }"
-      >
-        Team
-      </mat-button-toggle>
-      <mat-button-toggle
-        value="location"
-        routerLink="/schedule"
-        [queryParams]="{ mode: 'location' }"
-        >Standort</mat-button-toggle
-      >
-      <mat-button-toggle
-        value="time"
-        routerLink="/schedule"
-        [queryParams]="{ mode: 'time' }"
-      >
-        Zeit
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
+<div class="mode">
+  <small> Wähle die Ansicht für Spielplan & Resultate: </small>
+  <mat-button-toggle-group [value]="mode$ | async" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="team" routerLink="/schedule" [queryParams]="{ mode: 'team' }"> Team </mat-button-toggle>
+    <mat-button-toggle value="location" routerLink="/schedule" [queryParams]="{ mode: 'location' }">Standort</mat-button-toggle>
+    <mat-button-toggle value="time" routerLink="/schedule" [queryParams]="{ mode: 'time' }"> Zeit </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
 
+@switch (mode$ | async) {
   <!-- LOCATIONS -->
-  <ng-container *ngSwitchCase="'location'">
+  @case ("location") {
     <app-location-schedule></app-location-schedule>
-  </ng-container>
-
+  }
   <!-- TIME -->
-  <ng-container *ngSwitchCase="'time'">
+  @case ("time") {
     <app-time-schedule></app-time-schedule>
-  </ng-container>
-
+  }
   <!-- TEAMS -->
-  <ng-container *ngSwitchDefault>
+  @default {
     <app-team-schedule></app-team-schedule>
-  </ng-container>
-</ng-container>
+  }
+}

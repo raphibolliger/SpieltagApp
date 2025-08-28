@@ -2,66 +2,85 @@
   <mat-form-field>
     <mat-label>Wähle dein Team</mat-label>
     <mat-select [formControl]="teamControl">
-      <mat-option *ngFor="let team of teams" [value]="team.number">
-        <span>Team {{ team.number }} - {{ team.captain }}</span>
-      </mat-option>
+      @for (team of teams; track team.number) {
+        <mat-option [value]="team.number">
+          <span>Team {{ team.number }} - {{ team.captain }}</span>
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 </div>
 
-<div class="team-game" *ngFor="let game of teamGames$ | async">
-  <div class="time">
-    <span>{{ game.time.from }}</span>
-    <span>bis {{ game.time.to }}</span>
+@let games = teamGames$ | async;
+@for (game of games; track $index) {
+  <div class="team-game">
+    <div class="time">
+      <span>{{ game.time.from }}</span>
+      <span>bis {{ game.time.to }}</span>
+    </div>
+    @if (game.type === "game") {
+      <div class="info">
+        <span>
+          <strong>{{ game.location.name }}</strong>
+        </span>
+        <span>
+          {{ game.location.game }}
+          @if (game.leftTeam.number === teamControl.value) {
+            {{ game.location.number === 11 ? "mit" : "vs" }} Team
+            {{ game.rightTeam.number }}
+          } @else {
+            {{ game.location.number === 11 ? "mit" : "vs" }} Team
+            {{ game.leftTeam.number }}
+          }
+        </span>
+      </div>
+      <div class="results">
+        @if (game.leftTeam.number === teamControl.value) {
+          @switch (game.leftTeamPoints) {
+            @case (undefined) {
+              <span></span>
+            }
+            @case (3) {
+              <span style="color: green">Sieg</span>
+            }
+            @case (1) {
+              <span style="color: skyblue">Unentschieden</span>
+            }
+            @case (0) {
+              <span style="color: red">Niederlage</span>
+            }
+            @default {
+              <span></span>
+            }
+          }
+          @if (game.leftTeamPoints !== undefined) {
+            <span> Punkte: {{ game.leftTeamPoints }} </span>
+          }
+        } @else {
+          @switch (game.rightTeamPoints) {
+            @case (undefined) {
+              <span></span>
+            }
+            @case (3) {
+              <span style="color: green">Sieg</span>
+            }
+            @case (1) {
+              <span style="color: skyblue">Unentschieden</span>
+            }
+            @case (0) {
+              <span style="color: red">Niederlage</span>
+            }
+            @default {
+              <span></span>
+            }
+          }
+          @if (game.rightTeamPoints !== undefined) {
+            <span> Punkte: {{ game.rightTeamPoints }} </span>
+          }
+        }
+      </div>
+    } @else {
+      <span>☕️&nbsp;&nbsp;Pause</span>
+    }
   </div>
-  @if (game.type === 'game'){
-  <div class="info">
-    <span>
-      <strong>{{ game.location.name }}</strong>
-    </span>
-    <span>
-      {{ game.location.game }}
-      <ng-container
-        *ngIf="game.leftTeam.number === teamControl.value; else leftTeam"
-      >
-        {{ game.location.number === 11 ? "mit" : "vs" }} Team
-        {{ game.rightTeam.number }}
-      </ng-container>
-      <ng-template #leftTeam>
-        {{ game.location.number === 11 ? "mit" : "vs" }} Team
-        {{ game.leftTeam.number }}
-      </ng-template>
-    </span>
-  </div>
-  <div class="results">
-    <ng-container
-      *ngIf="game.leftTeam.number === teamControl.value; else rightPoints"
-    >
-      <ng-container [ngSwitch]="game.leftTeamPoints">
-        <span *ngSwitchCase="undefined"></span>
-        <span *ngSwitchCase="'3'" style="color: green">Sieg</span>
-        <span *ngSwitchCase="'1'" style="color: skyblue">Unentschieden</span>
-        <span *ngSwitchCase="'0'" style="color: red">Niederlage</span>
-        <span *ngSwitchDefault></span>
-      </ng-container>
-      <span *ngIf="game.leftTeamPoints !== undefined">
-        Punkte: {{ game.leftTeamPoints }}
-      </span>
-    </ng-container>
-    <ng-template #rightPoints>
-      <ng-container [ngSwitch]="game.rightTeamPoints">
-        <span *ngSwitchCase="undefined"></span>
-        <span *ngSwitchCase="'3'" style="color: green">Sieg</span>
-        <span *ngSwitchCase="'1'" style="color: skyblue">Unentschieden</span>
-        <span *ngSwitchCase="'0'" style="color: red">Niederlage</span>
-        <span *ngSwitchDefault></span>
-      </ng-container>
-      <span *ngIf="game.rightTeamPoints !== undefined">
-        Punkte: {{ game.rightTeamPoints }}
-      </span>
-    </ng-template>
-  </div>
-  } @else {
-  <span>☕️&nbsp;&nbsp;Pause</span>
-  }
-</div>
+}
