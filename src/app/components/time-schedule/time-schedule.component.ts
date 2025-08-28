@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith, switchMap } from 'rxjs';
 import { TIMES } from 'src/app/data/times';
 import { DataImportService } from 'src/app/services/data-import.service';
+import { MatFormField, MatLabel, MatSelect, MatOption } from '@angular/material/select';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { GameResultColorPipe } from '../../pipes/game-result-color.pipe';
 
 @Component({
     selector: 'app-time-schedule',
     templateUrl: './time-schedule.component.html',
     styleUrls: ['./time-schedule.component.scss'],
-    standalone: false
+    imports: [MatFormField, MatLabel, MatSelect, ReactiveFormsModule, MatOption, NgClass, AsyncPipe, GameResultColorPipe]
 })
 export class TimeScheduleComponent {
   readonly times = TIMES;

@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { switchMap, startWith, map } from 'rxjs';
 import { LOCATIONS } from 'src/app/data/locations';
 import { DataImportService } from 'src/app/services/data-import.service';
+import { MatFormField, MatLabel, MatSelect, MatOption } from '@angular/material/select';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { GameResultColorPipe } from '../../pipes/game-result-color.pipe';
 
 @Component({
     selector: 'app-location-schedule',
     templateUrl: './location-schedule.component.html',
     styleUrls: ['./location-schedule.component.scss'],
-    standalone: false
+    imports: [MatFormField, MatLabel, MatSelect, ReactiveFormsModule, MatOption, NgClass, AsyncPipe, GameResultColorPipe]
 })
 export class LocationScheduleComponent {
   readonly initialLocationNumber: number;

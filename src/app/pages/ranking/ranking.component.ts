@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { TEAMS, Team } from 'src/app/data/teams';
 import { DataImportService } from 'src/app/services/data-import.service';
+import { AsyncPipe } from '@angular/common';
 
 interface TeamRanking {
   team: Team;
@@ -15,7 +16,7 @@ interface TeamRanking {
 @Component({
     templateUrl: './ranking.component.html',
     styleUrls: ['./ranking.component.scss'],
-    standalone: false
+    imports: [AsyncPipe]
 })
 export class RankingComponent {
   readonly teams$: Observable<TeamRanking[]>;
