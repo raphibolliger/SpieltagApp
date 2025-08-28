@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, shareReplay, tap } from 'rxjs';
-import { Game } from '../data/game';
+import { Game, Pause } from '../data/game';
 import { LOCATIONS } from '../data/locations';
 import { TEAMS, Team } from '../data/teams';
 import { Time } from '../data/times';
@@ -10,7 +10,7 @@ import { Time } from '../data/times';
   providedIn: 'root',
 })
 export class DataImportService {
-  readonly games$: Observable<Game[]> = this.httpClient
+  readonly games$: Observable<(Game | Pause)[]> = this.httpClient
     .get('assets/schedule.txt', {
       responseType: 'text',
       headers: {
@@ -42,11 +42,7 @@ export class DataImportService {
             const right = parseInt(rightString);
             const rightTeam = TEAMS.find((team) => team.number === right);
 
-            const time: Time = {
-              number: lineIndex + 1,
-              from,
-              to,
-            };
+            const time: Time = { number: lineIndex + 1, from, to };
 
             const leftTeamPointsTemp = parseInt(fields[locationIndex + 4]);
             const rightTeamPointsTemp = parseInt(fields[locationIndex + 5]);
@@ -67,6 +63,7 @@ export class DataImportService {
 
             if (leftTeam && rightTeam) {
               const game: Game = {
+                type: 'game',
                 time,
                 location,
                 leftTeam,
@@ -77,7 +74,11 @@ export class DataImportService {
               return game;
             }
 
-            return undefined;
+            return <Pause>{
+              type: 'pause',
+              time: time,
+              location: location,
+            };
           });
 
           return games.filter((game) => game !== undefined) as Game[];

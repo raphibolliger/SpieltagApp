@@ -26,11 +26,13 @@ export class RankingComponent {
           map((games) => {
             return teams
               .map((team) => {
-                const teamGames = games.filter(
-                  (game) =>
-                    game.leftTeam.number === team.number ||
-                    game.rightTeam.number === team.number
-                );
+                const teamGames = games
+                  .filter((g) => g.type === 'game')
+                  .filter(
+                    (game) =>
+                      game.leftTeam.number === team.number ||
+                      game.rightTeam.number === team.number
+                  );
                 const teamRanking: TeamRanking = {
                   team,
                   points: teamGames.reduce((acc, game) => {
