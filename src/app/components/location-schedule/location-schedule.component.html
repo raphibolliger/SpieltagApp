@@ -1,44 +1,109 @@
-<div class="locations">
-  <mat-form-field>
-    <mat-label>Wähle dein Standort</mat-label>
-    <mat-select [formControl]="locationControl">
-      @for (location of locations; track location.number) {
-        <mat-option [value]="location.number">
-          <span>
-            <strong>{{ location.name }}</strong> - {{ location.game }}
-          </span>
-        </mat-option>
+@let games = locationGames$ | async;
+<div class="print:hidden">
+  <div class="locations">
+    <mat-form-field>
+      <mat-label>Wähle dein Standort</mat-label>
+      <mat-select [formControl]="locationControl">
+        @for (location of locations; track location.number) {
+          <mat-option [value]="location.number">
+            <span>
+              <strong>{{ location.name }}</strong> - {{ location.game }}
+            </span>
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  @for (game of games; track game.time.number) {
+    <div class="location-game">
+      <div class="time">
+        <span>{{ game.time.from }}</span>
+        <span>bis {{ game.time.to }}</span>
+      </div>
+      @if (game.type === "game") {
+        <div class="team left">
+          <span [ngClass]="game.leftTeamPoints | resultColor"> Team {{ game.leftTeam.number }} </span>
+          <span>{{ game.leftTeam.captain }}</span>
+        </div>
+        <span style="text-align: center">
+          {{ game.location.number === 9 ? "mit" : "vs" }}
+        </span>
+        <div class="team">
+          <span [ngClass]="game.rightTeamPoints | resultColor"> Team {{ game.rightTeam.number }} </span>
+          <span>{{ game.rightTeam.captain }}</span>
+        </div>
+      } @else {
+        <span style="text-align: center; grid-column: span 3">
+          @if (game.time.number === 7) {
+            😋&nbsp;&nbsp;Mittagspause
+          } @else {
+            🧃&nbsp;&nbsp;Pause
+          }
+        </span>
       }
-    </mat-select>
-  </mat-form-field>
+    </div>
+  }
 </div>
 
-@for (game of locationGames$ | async; track $index) {
-  <div class="location-game">
-    <div class="time">
-      <span>{{ game.time.from }}</span>
-      <span>bis {{ game.time.to }}</span>
-    </div>
-    @if (game.type === "game") {
-      <div class="team left">
-        <span [ngClass]="game.leftTeamPoints | resultColor"> Team {{ game.leftTeam.number }} </span>
-        <span>{{ game.leftTeam.captain }}</span>
-      </div>
-      <span style="text-align: center">
-        {{ game.location.number === 9 ? "mit" : "vs" }}
-      </span>
-      <div class="team">
-        <span [ngClass]="game.rightTeamPoints | resultColor"> Team {{ game.rightTeam.number }} </span>
-        <span>{{ game.rightTeam.captain }}</span>
-      </div>
-    } @else {
-      <span style="text-align: center; grid-column: span 3">
-        @if (game.time.number === 7) {
-          😋&nbsp;&nbsp;Mittagspause
-        } @else {
-          🧃&nbsp;&nbsp;Pause
-        }
-      </span>
+<div class="hidden print:block">
+  <table class="border-2 w-full">
+    @for (game of games; track game.time.number; let first = $first) {
+      @if (first) {
+        <thead class="border-b-2">
+          <tr class="bg-gray-200">
+            <th colspan="7" class="text-center text-4xl p-5">
+              {{ game.location.name }} - <span class="font-normal">{{ game.location.game }}</span>
+            </th>
+          </tr>
+          <tr class="bg-gray-200">
+            <th colspan="7" class="pb-5 text-xl font-normal">{{ game.location.manager }}</th>
+          </tr>
+          <tr class="text-3xl border-t-2 bg-gray-100">
+            <th width="20%" colspan="2" class="p-6 border-r-2">Zeit</th>
+            <th width="20%" class="border-r-1">Punkte</th>
+            <th width="20%" colspan="3">Teams</th>
+            <th width="20%" class="border-l-1">Punkte</th>
+          </tr>
+        </thead>
+      }
+      <tbody class="text-3xl">
+        <tr class="border-b">
+          <td class="text-center p-8 pr-2" [class.text-gray-300]="game.type === 'pause'">{{ game.time.from }}</td>
+          <td class="text-center p-8 pl-2 border-r-2 border-black" [class.text-gray-300]="game.type === 'pause'">{{ game.time.to }}</td>
+          @if (game.type === "game") {
+            <td></td>
+            <td class="text-left pl-6 text-5xl border-l">
+              <span class="font-bold">{{ game.leftTeam.number }}</span>
+            </td>
+            <td class="text-center">
+              <span>&nbsp;↔&nbsp;</span>
+            </td>
+            <td class="text-right pr-6 text-5xl border-r">
+              <span class="font-bold">{{ game.rightTeam.number }}</span>
+            </td>
+            <td></td>
+          } @else {
+            <td colspan="5" class="text-center text-4xl text-gray-300">
+              @if (game.time.number === 7) {
+                Mittagspause
+              } @else {
+                Pause
+              }
+            </td>
+          }
+        </tr>
+      </tbody>
     }
+  </table>
+  <div class="text-3xl p-5 py-0">
+    <ul class="list-disc list-inside my-4">
+      <li>Sieg: 3 Punkte</li>
+      <li>Unentschieden: 1 Punkt</li>
+      <li>Niederlage: 0 Punkte</li>
+    </ul>
+    <p>
+      Bitte nach jedem Spiel dieses Blatt fotografieren und das Foto entweder per WhatsApp an 076 525 09 57 oder per E-Mail an <span class="text-nowrap">raphael.bolliger@handball-wohlen.ch</span> senden, damit die Punkte korrekt erfasst werden können.
+    </p>
   </div>
-}
+</div>

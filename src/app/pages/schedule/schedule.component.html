@@ -1,4 +1,4 @@
-<div class="mode">
+<div class="mode print:hidden">
   <small> Wähle die Ansicht für Spielplan & Resultate: </small>
   <mat-button-toggle-group [value]="mode$ | async" name="fontStyle" aria-label="Font Style">
     <mat-button-toggle value="team" routerLink="/schedule" [queryParams]="{ mode: 'team' }"> Team </mat-button-toggle>
