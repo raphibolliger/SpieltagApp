@@ -12,9 +12,9 @@ export const TIMES: Time[] = [
   { number: 5, from: '11:10', to: '11:30' },
   { number: 6, from: '11:35', to: '11:55' },
   { number: 7, from: '12:00', to: '13:30' }, // mittagessen, index/number is used
-  { number: 8, from: '13:20', to: '13:40' },
-  { number: 9, from: '13:45', to: '14:05' },
-  { number: 10, from: '14:10', to: '14:30' },
-  { number: 11, from: '14:35', to: '14:55' },
-  { number: 12, from: '15:00', to: '15:20' },
+  { number: 8, from: '13:30', to: '13:50' },
+  { number: 9, from: '13:55', to: '14:15' },
+  { number: 10, from: '14:20', to: '14:40' },
+  { number: 11, from: '14:45', to: '15:05' },
+  { number: 12, from: '15:10', to: '15:30' },
 ];
