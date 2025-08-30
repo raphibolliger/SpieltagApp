@@ -1,17 +1,17 @@
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { switchMap, startWith, map } from 'rxjs';
+import { MatFormField, MatLabel, MatOption, MatSelect } from '@angular/material/select';
+import { map, startWith, switchMap } from 'rxjs';
 import { LOCATIONS } from 'src/app/data/locations';
 import { DataImportService } from 'src/app/services/data-import.service';
-import { MatFormField, MatLabel, MatSelect, MatOption } from '@angular/material/select';
-import { NgClass, AsyncPipe } from '@angular/common';
 import { GameResultColorPipe } from '../../pipes/game-result-color.pipe';
 
 @Component({
-    selector: 'app-location-schedule',
-    templateUrl: './location-schedule.component.html',
-    styleUrls: ['./location-schedule.component.scss'],
-    imports: [MatFormField, MatLabel, MatSelect, ReactiveFormsModule, MatOption, NgClass, AsyncPipe, GameResultColorPipe]
+  selector: 'app-location-schedule',
+  templateUrl: './location-schedule.component.html',
+  styleUrls: ['./location-schedule.component.scss'],
+  imports: [MatFormField, MatLabel, MatSelect, ReactiveFormsModule, MatOption, NgClass, AsyncPipe, GameResultColorPipe],
 })
 export class LocationScheduleComponent {
   readonly initialLocationNumber: number;
@@ -26,19 +26,16 @@ export class LocationScheduleComponent {
           if (locationNumber) {
             localStorage.setItem('locationNumber', locationNumber.toString());
           }
-          return games.filter(
-            (game) => game.location.number === locationNumber
-          );
-        })
-      )
-    )
+          const locationGames = games.filter((game) => game.location.number === locationNumber);
+          return locationGames;
+        }),
+      ),
+    ),
   );
 
   constructor(private dataImport: DataImportService) {
     // set initial location number
-    const locationNumber = parseInt(
-      localStorage.getItem('locationNumber') || '1'
-    );
+    const locationNumber = parseInt(localStorage.getItem('locationNumber') || '1');
     if (locationNumber > 0) {
       this.initialLocationNumber = locationNumber;
     } else {
